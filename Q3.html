@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> implement stack using queue</title>
+</head>
+<body>
+    <script>
+        class Queue {
+    constructor() {
+        this.item = [];
+    }
+
+    enqueue(element) {
+        this.item.push(element);
+    }
+
+    dequeue() {
+        if (this.isEmpty()) return "Underflow";
+        return this.item.shift();
+    }
+
+    isEmpty() {
+        return this.item.length === 0;
+    }
+
+    front() {
+        if (this.isEmpty()) return "No elements in Queue";
+        return this.item[0];
+    }
+}
+
+class StackUsingQueue {
+    constructor() {
+        this.q1 = new Queue();
+        this.q2 = new Queue();
+    }
+
+    push(element) {
+        this.q2.enqueue(element);
+        while (!this.q1.isEmpty()) {
+            this.q2.enqueue(this.q1.dequeue());
+        }
+        let temp = this.q1;
+        this.q1 = this.q2;
+        this.q2 = temp;
+    }
+
+    pop() {
+        if (this.q1.isEmpty()) return "Underflow";
+        return this.q1.dequeue();
+    }
+
+    top() {
+        if (this.q1.isEmpty()) return "No elements in Stack";
+        return this.q1.front();
+    }
+}
+
+let stack = new StackUsingQueue();
+stack.push(10);
+stack.push(20);
+stack.push(30);
+console.log(stack.pop()); 
+
+    </script>
+</body>
+</html>

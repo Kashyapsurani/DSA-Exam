@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Quick Sort</title>
+</head>
+
+<body>
+    <script>
+
+        function quickSort(array) {
+            if (array.length <= 1) return array;
+
+            let pivot = array[array.length - 1];
+            let left = [];
+            let right = [];
+
+            for (let i = 0; i < array.length - 1; i++) {
+                if (array[i] < pivot) {
+                    left.push(array[i]);
+                } else {
+                    right.push(array[i]);
+                }
+            }
+
+            return [...quickSort(left), pivot, ...quickSort(right)];
+        }
+
+        let array = [64, 25, 12, 22, 11];
+        console.log(quickSort(array)); 
+
+    </script>
+</body>
+
+</html>
